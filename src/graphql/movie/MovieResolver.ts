@@ -10,8 +10,18 @@ class MovieInput {
   name: string;
   @Field()
   cover: string;
-  // @Field()
-  // category: string;
+  @Field()
+  category: string;
+}
+
+@InputType()
+class UpdateMovieProps {
+  @Field({ nullable: true })
+  description: string;
+  @Field({ nullable: true })
+  name: string;
+  @Field({ nullable: true })
+  cover: string;
 }
 
 @InputType()
@@ -28,6 +38,12 @@ class MovieResolver {
     return movies;
   }
 
+  @Query(() => Movie)
+  async getMovieById(@Arg('movieId') movieId: MovieId) {
+    const movie = await MovieSchema.findById(movieId);
+    return movie;
+  }
+
   @Mutation(() => Movie)
   async createMovie(@Arg('movieInput') movieInput: MovieInput) {
     const movie = await MovieSchema.create(movieInput);
@@ -42,6 +58,16 @@ class MovieResolver {
     } catch (e) {
       return false;
     }
+  }
+
+  @Mutation(() => Movie)
+  async updateMovie(
+    @Arg('movieId') movieId: MovieId,
+    @Arg('movieInput') movieInput: UpdateMovieProps
+  ) {
+    const movie = await MovieSchema.findByIdAndUpdate(movieId._id, movieInput);
+
+    return movie;
   }
 }
 

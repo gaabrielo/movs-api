@@ -12,8 +12,8 @@ class Movie {
   name: string;
   @Field()
   description: string;
-  // @Field()
-  // category: string;
+  @Field()
+  category: string;
   @Field()
   cover: string;
   @Field()
