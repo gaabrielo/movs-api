@@ -1,4 +1,5 @@
 import { Field, ObjectType } from 'type-graphql';
+import Category from '../category/Category';
 
 class FileInput implements Partial<any> {
   filename: string;
@@ -13,7 +14,7 @@ class Movie {
   @Field()
   description: string;
   @Field()
-  category: string;
+  category: Category;
   @Field()
   cover: string;
   @Field()

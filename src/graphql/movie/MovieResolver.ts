@@ -10,7 +10,7 @@ class MovieInput {
   name: string;
   @Field()
   cover: string;
-  @Field()
+  @Field({ nullable: true })
   category: string;
 }
 
@@ -22,6 +22,8 @@ class UpdateMovieProps {
   name: string;
   @Field({ nullable: true })
   cover: string;
+  @Field({ nullable: true })
+  category: string;
 }
 
 @InputType()
